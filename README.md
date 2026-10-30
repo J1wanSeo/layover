@@ -9,6 +9,12 @@ Everything else on your Mac stays on your normal connection.
 
 <p align="center"><a href="#한국어">한국어</a></p>
 
+<p align="center">
+  <img src="docs/images/menu.png" width="280" alt="Layover menu, connected to Seoul">
+  &nbsp;&nbsp;
+  <img src="docs/images/vpn-chrome.png" width="520" alt="VPN Chrome window showing a Seoul exit IP">
+</p>
+
 ---
 
 ## Why
@@ -31,11 +37,26 @@ site — without slowing down or relocating everything else.
 
 Requires macOS 13 or later (Apple Silicon or Intel) and Google Chrome.
 
-1. Download `Layover-x.y.z.dmg` from [Releases](https://github.com/J1wanSeo/layover/releases),
-   open it, and drag `Layover.app` onto `Applications`. (A `.zip` is also provided.)
-2. Layover is not notarized by Apple, so the first launch is blocked. Open it once, then go to
-   **System Settings → Privacy & Security** and click **Open Anyway**.
-   (Or build it yourself — see below — and no warning appears.)
+### 1. Drag to Applications
+
+Download `Layover-x.y.z.dmg` from [Releases](https://github.com/J1wanSeo/layover/releases),
+open it, and drag `Layover.app` onto `Applications`. (A `.zip` is also provided.)
+
+<img src="docs/images/install-dmg.png" width="520" alt="DMG window: drag Layover.app to Applications">
+
+### 2. Allow it to open (first launch only)
+
+Layover is not notarized by Apple, so macOS blocks the first launch. Click **Done**
+(not *Move to Trash*).
+
+<img src="docs/images/gatekeeper-blocked.png" width="260" alt="Layover.app Not Opened dialog">
+
+Then open **System Settings → Privacy & Security**, scroll to **Security**, click
+**Open Anyway** and confirm with your password or Touch ID. From then on it opens normally.
+
+<img src="docs/images/open-anyway.png" width="560" alt="Privacy & Security: Open Anyway button">
+
+If you build it yourself (see below), none of this appears.
 
 ## Usage
 
@@ -47,15 +68,13 @@ Requires macOS 13 or later (Apple Silicon or Intel) and Google Chrome.
 2. Menu bar icon → **Add config file…** → pick the `.conf` → give it a name (e.g. `seoul`).
    The file is validated and copied to `~/.config/myvpn/` (mode 600). Layover offers to
    move the original to the Trash, because it contains your private key.
-3. **Connect.** The menu shows the exit IP and city once the server answers.
-4. **Open VPN Chrome.**
+3. **Connect** (연결). The menu shows the exit IP and city once the server answers.
+4. **Open VPN Chrome** (VPN Chrome 열기). Only this window uses the VPN — check it at
+   [ipinfo.io/json](https://ipinfo.io/json).
 
-| Menu bar icon | State |
-|---|---|
-| `airplane.arrival` | Disconnected |
-| `airplane.departure` | Connecting |
-| `airplane.circle.fill` | Connected |
-| `exclamationmark.triangle` | Failed (reason in menu) |
+The menu bar icon shows the state:
+
+<img src="docs/images/states.png" width="600" alt="Menu bar icons: disconnected, connecting, connected, failed">
 
 Quitting Layover — or Layover crashing — always shuts the tunnel down.
 
@@ -118,14 +137,16 @@ subscribe to, and follow their terms.
 - 관리자 권한이나 Apple 개발자 계정이 필요 없어요.
 
 ### 설치
-1. [Releases](https://github.com/J1wanSeo/layover/releases)에서 `.dmg`를 받아 열고, `Layover.app`을 `Applications`로 끌어다 놓아요.
-2. Apple 공증을 받지 않은 앱이라 처음 열면 실행이 막혀요. 한 번 연 다음 **시스템 설정 → 개인정보 보호 및 보안 → 그래도 열기**를 누르세요.
+1. [Releases](https://github.com/J1wanSeo/layover/releases)에서 `.dmg`를 받아 열고, `Layover.app`을 `Applications`로 끌어다 놓아요. ([그림](#1-drag-to-applications))
+2. Apple 공증을 받지 않은 앱이라 처음 열면 실행이 막혀요. 경고 창에서 **완료(Done)**를 누르세요. *휴지통으로 이동*을 누르면 안 돼요.
+3. **시스템 설정 → 개인정보 보호 및 보안**에서 아래 **보안** 항목까지 내려가 **그래도 열기(Open Anyway)**를 누르고 암호나 Touch ID로 확인해요. 다음부터는 그냥 열려요. ([그림](#2-allow-it-to-open-first-launch-only))
 
 ### 사용법
 1. VPN 업체에서 WireGuard 설정 파일을 받아요. 플랫폼을 고르라고 하면 *Linux*를 고르세요.
 2. 메뉴바 아이콘 → **설정 파일 추가…** → 이름 입력(예: `seoul`). 원본 파일에는 개인키가 들어 있어서, 휴지통으로 옮길지 물어봐요.
 3. **연결**을 누르면 연결된 뒤 출구 IP와 도시가 메뉴에 표시돼요.
-4. **VPN Chrome 열기**를 눌러요.
+4. **VPN Chrome 열기**를 눌러요. 이 창만 VPN을 타요. [ipinfo.io/json](https://ipinfo.io/json)에서 확인할 수 있어요.
+5. 메뉴바 아이콘으로 상태를 알 수 있어요. 착륙 모양은 꺼짐, 이륙 모양은 연결 중, 동그라미 안 비행기는 연결됨, ⚠︎는 실패예요.
 
 ### 한계
 - Chrome 전용이에요. KakaoTalk처럼 프록시 설정이 없는 앱은 VPN으로 보낼 수 없어요.
