@@ -1,6 +1,6 @@
 #!/bin/sh
 # Builds build/Layover.app (universal: Apple Silicon + Intel) and
-# build/Layover-<version>.zip for GitHub Releases.
+# build/Layover-<version>.dmg and .zip for GitHub Releases.
 # The version comes from packaging/Info.plist (CFBundleShortVersionString).
 set -eu
 cd "$(dirname "$0")/.."
@@ -42,5 +42,16 @@ ZIP="build/Layover-$VERSION.zip"
 rm -f "$ZIP"
 ditto -c -k --keepParent "$APP" "$ZIP"
 
+# Drag-to-install disk image: Layover.app next to an /Applications link.
+DMG="build/Layover-$VERSION.dmg"
+STAGE=build/dmg
+rm -rf "$STAGE" "$DMG"
+mkdir -p "$STAGE"
+cp -R "$APP" "$STAGE/"
+ln -s /Applications "$STAGE/Applications"
+hdiutil create -quiet -volname "Layover $VERSION" -srcfolder "$STAGE" -fs HFS+ -format UDZO "$DMG"
+rm -rf "$STAGE"
+
 echo "built $APP ($VERSION, $(lipo -archs "$APP/Contents/MacOS/Layover"))"
 echo "built $ZIP"
+echo "built $DMG"

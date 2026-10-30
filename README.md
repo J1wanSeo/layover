@@ -31,8 +31,8 @@ site — without slowing down or relocating everything else.
 
 Requires macOS 13 or later (Apple Silicon or Intel) and Google Chrome.
 
-1. Download `Layover-x.y.z.zip` from [Releases](https://github.com/J1wanSeo/layover/releases)
-   and move `Layover.app` to `/Applications`.
+1. Download `Layover-x.y.z.dmg` from [Releases](https://github.com/J1wanSeo/layover/releases),
+   open it, and drag `Layover.app` onto `Applications`. (A `.zip` is also provided.)
 2. Layover is not notarized by Apple, so the first launch is blocked. Open it once, then go to
    **System Settings → Privacy & Security** and click **Open Anyway**.
    (Or build it yourself — see below — and no warning appears.)
@@ -91,7 +91,7 @@ Any app that supports a SOCKS5 proxy can use `127.0.0.1:1080` while the tunnel i
 Needs Go 1.25+ and Xcode Command Line Tools (`xcode-select --install`). Xcode itself is not required.
 
 ```sh
-./scripts/build-app.sh          # → build/Layover.app (universal) and build/Layover-<version>.zip
+./scripts/build-app.sh          # → build/Layover.app (universal), Layover-<version>.dmg and .zip
 swift scripts/make-icon.swift   # only to regenerate packaging/AppIcon.icns
 go test ./...
 ```
@@ -118,7 +118,7 @@ subscribe to, and follow their terms.
 - 관리자 권한이나 Apple 개발자 계정이 필요 없어요.
 
 ### 설치
-1. [Releases](https://github.com/J1wanSeo/layover/releases)에서 zip을 받아 `Layover.app`을 `/Applications`로 옮겨요.
+1. [Releases](https://github.com/J1wanSeo/layover/releases)에서 `.dmg`를 받아 열고, `Layover.app`을 `Applications`로 끌어다 놓아요.
 2. Apple 공증을 받지 않은 앱이라 처음 열면 실행이 막혀요. 한 번 연 다음 **시스템 설정 → 개인정보 보호 및 보안 → 그래도 열기**를 누르세요.
 
 ### 사용법
